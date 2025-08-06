@@ -1,0 +1,34 @@
+{
+  "buses": [
+    {
+      "name": "Bus 101 - City Express",
+      "route": "Vijayawada ↔ Guntur",
+      "busnumber": "AP01AB1234",
+      "image": "bus1.jpg",
+      "latitude": 16.5062,
+      "longitude": 80.6480
+    },
+    {
+      "name": "Bus 202 - College Shuttle",
+      "route": "Campus ↔ Hostel",
+      "busnumber": "AP02CD5678",
+      "image": "bus2.jpg",
+      "latitude": 16.5151,
+      "longitude": 80.6350
+    }
+  ],
+  "drivers": [
+    {
+      "name": "Ravi Kumar",
+      "route": "Vijayawada ↔ Guntur",
+      "mnumber": "9876543210",
+      "image": "driver1.jpg"
+    },
+    {
+      "name": "Suman Rao",
+      "route": "Campus ↔ Hostel",
+      "mnumber": "9123456780",
+      "image": "driver2.jpg"
+    }
+  ]
+}

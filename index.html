@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Campus Bus Tracking System</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="background-overlay"></div>
+
+  <header id="header">
+    <div id="searchbar">
+      <input type="text" id="searchinput" placeholder="Search buses..." />
+      <input type="text" id="place" placeholder="Place" />
+      <input type="text" id="busdriver" placeholder="Bus Driver" />
+      <input type="text" id="busnumber" placeholder="Bus Number" />
+    </div>
+
+    <div id="right">
+      <button id="bushbtn">Buses</button>
+      <button id="driverhbtn">Drivers</button>
+      <button id="loginbtn"><a href="login.html">Login</a></button>
+
+      <!-- Profile Dropdown -->
+      <div id="user-profile" style="display: none;">
+        <div id="user-name">👤 <span id="display-name"></span></div>
+        <ul id="dropdown">
+          <li><strong id="dropdown-name"></strong></li>
+          <li><a href="#">Manage Account</a></li>
+          <li><a href="#" onclick="logout()">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main id="cardcontainer">
+    <!-- Cards will be dynamically inserted here -->
+  </main>
+
+  <div id="map-toggle-btn">
+    <img src="map.png" alt="Map Icon" onclick="toggleMap()" />
+  </div>
+
+  <section id="map-section" style="display: none;">
+    <h2>Live Bus Location</h2>
+    <div id="map"></div>
+  </section>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+  <script>
+    function toggleMap() {
+      const mapSection = document.getElementById('map-section');
+      if (mapSection.style.display === 'none') {
+        mapSection.style.display = 'block';
+        if (!window.mapInitialized) {
+          initMap();
+          window.mapInitialized = true;
+        }
+      } else {
+        mapSection.style.display = 'none';
+      }
+    }
+
+    function initMap() {
+      const map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: 12.9716, lng: 77.5946 }, // Example coordinates
+        zoom: 14,
+      });
+
+      new google.maps.Marker({
+        position: { lat: 12.9716, lng: 77.5946 },
+        map: map,
+        title: "Bus Location",
+      });
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      const isLoggedIn = localStorage.getItem("loggedIn") === "true";
+      const username = localStorage.getItem("username");
+
+      if (isLoggedIn && username) {
+        document.getElementById("loginbtn").style.display = "none";
+        document.getElementById("user-profile").style.display = "block";
+        document.getElementById("display-name").textContent = username;
+        document.getElementById("dropdown-name").textContent = username;
+      }
+    });
+
+    function logout() {
+      localStorage.removeItem("loggedIn");
+      localStorage.removeItem("username");
+      window.location.href = "login.html";
+    }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY" async defer></script>
+</body>
+</html>
